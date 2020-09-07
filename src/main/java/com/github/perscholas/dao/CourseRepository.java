@@ -1,28 +1,31 @@
 package com.github.perscholas.dao;
 
-import com.github.perscholas.model.Course;
-import com.github.perscholas.model.CourseBuilder;
-import com.github.perscholas.model.Student;
-import com.github.perscholas.model.StudentBuilder;
+import com.github.perscholas.model.*;
 
-public class CourseRepository extends AbstractJpaRepository<Integer,Course>{
+import java.util.List;
 
-        public CourseRepository(String persistenceUnitName) {
-            super(persistenceUnitName);
-        }
-
-        @Override
-        public Class<Course> getEntityClass() {
-            return Course.class;
-        }
-
-        @Override
-        public Course update(Course dataToBeUpdated, Course newEntityData) {
-            return new CourseBuilder(dataToBeUpdated)
-                    .setId(newEntityData.getId())
-                    .setName(newEntityData.getName())
-                    .setInstructor(newEntityData.getInstructor())
-                    .build();
-        }
+public class CourseRepository extends AbstractJpaRepository<Integer, CourseInterface> implements CourseDao {
+    public CourseRepository(String persistenceUnitName) {
+        super(persistenceUnitName);
     }
+
+    @Override
+    public Class<CourseInterface> getEntityClass() {
+        return CourseInterface.class;
+    }
+
+    @Override
+    public CourseInterface update(CourseInterface dataToBeUpdated, CourseInterface newEntityData) {
+        return new CourseBuilder(dataToBeUpdated)
+                .setId(newEntityData.getId())
+                .setName(newEntityData.getName())
+                .setInstructor(newEntityData.getInstructor())
+                .build();
+    }
+
+    @Override
+    public List<CourseInterface> getAllCourses() {
+        return super.findAll();
+    }
+}
 
