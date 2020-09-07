@@ -9,7 +9,7 @@ public class CourseBuilder {
     public CourseBuilder() {
     }
 
-    public CourseBuilder(Course dataToBeUpdated) {
+    public CourseBuilder(CourseInterface dataToBeUpdated) {
         this.id = dataToBeUpdated.getId();
         this.name = dataToBeUpdated.getName();
         this.instructor = dataToBeUpdated.getInstructor();
